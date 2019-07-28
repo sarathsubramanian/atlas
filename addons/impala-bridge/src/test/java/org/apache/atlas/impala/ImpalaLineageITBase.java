@@ -169,6 +169,8 @@ public class ImpalaLineageITBase {
 
     protected String assertProcessIsRegistered(List<String> processQFNames, String queryString) throws Exception {
         try {
+            Thread.sleep(5000);
+
             LOG.debug("Searching for process with query {}", queryString);
 
             return assertEntityIsRegistered(ImpalaDataType.IMPALA_PROCESS.getName(), processQFNames, new AssertPredicates() {
@@ -194,6 +196,8 @@ public class ImpalaLineageITBase {
 
     protected String assertProcessIsRegistered(String processQFName, String queryString) throws Exception {
         try {
+            Thread.sleep(5000);
+
             LOG.debug("Searching for process with qualified name {} and query {}", processQFName, queryString);
 
             return assertEntityIsRegistered(ImpalaDataType.IMPALA_PROCESS.getName(), ATTRIBUTE_QUALIFIED_NAME, processQFName, new AssertPredicate() {
@@ -212,6 +216,8 @@ public class ImpalaLineageITBase {
 
     private String assertProcessExecutionIsRegistered(AtlasEntity impalaProcess, final String queryString) throws Exception {
         try {
+            Thread.sleep(5000);
+
             String guid = "";
             List<AtlasObjectId> processExecutions = toAtlasObjectIdList(impalaProcess.getRelationshipAttribute(
                 BaseImpalaEvent.ATTRIBUTE_PROCESS_EXECUTIONS));
