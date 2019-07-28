@@ -107,7 +107,7 @@ public class ImpalaLineageITBase {
     // return guid of the entity
     protected String assertEntityIsRegistered(final String typeName, final String property, final String value,
         final AssertPredicate assertPredicate) throws Exception {
-        waitFor(80000, new Predicate() {
+        waitFor(100000, new Predicate() {
             @Override
             public void evaluate() throws Exception {
                 AtlasEntity.AtlasEntityWithExtInfo atlasEntityWithExtInfo = atlasClientV2.getEntityByAttribute(typeName, Collections
@@ -334,7 +334,7 @@ public class ImpalaLineageITBase {
     }
 
     protected  String createDatabase(String dbName) throws Exception {
-        runCommand("CREATE DATABASE IF NOT EXISTS " + dbName);
+        runCommandWithDelay("CREATE DATABASE IF NOT EXISTS " + dbName, 3000);
 
         return dbName;
     }
@@ -349,7 +349,7 @@ public class ImpalaLineageITBase {
     }
 
     protected String createTable(String dbName, String tableName, String columnsString, boolean isPartitioned) throws Exception {
-        runCommand("CREATE TABLE IF NOT EXISTS " + dbName + "." + tableName + " " + columnsString + " comment 'table comment' " + (isPartitioned ? " partitioned by(dt string)" : ""));
+        runCommandWithDelay("CREATE TABLE IF NOT EXISTS " + dbName + "." + tableName + " " + columnsString + " comment 'table comment' " + (isPartitioned ? " partitioned by(dt string)" : ""), 3000);
 
         return dbName + "." + tableName;
     }
